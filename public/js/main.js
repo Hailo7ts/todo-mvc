@@ -1,4 +1,6 @@
+//get items with delete class
 const deleteBtn = document.querySelectorAll('.del')
+
 const todoItem = document.querySelectorAll('span.not')
 const todoComplete = document.querySelectorAll('span.completed')
 
@@ -7,6 +9,7 @@ Array.from(deleteBtn).forEach((el)=>{
 })
 
 Array.from(todoItem).forEach((el)=>{
+    //run markComplete on clicked element
     el.addEventListener('click', markComplete)
 })
 
@@ -33,17 +36,23 @@ async function deleteTodo(){
 }
 
 async function markComplete(){
+    //grab item by node and use id
     const todoId = this.parentNode.dataset.id
+
     try{
+        //fetch on route todos/markComplete
         const response = await fetch('todos/markComplete', {
+            //use put/update method
             method: 'put',
             headers: {'Content-type': 'application/json'},
             body: JSON.stringify({
                 'todoIdFromJSFile': todoId
             })
         })
+        //server side controlller returns response
         const data = await response.json()
         console.log(data)
+        //reload page
         location.reload()
     }catch(err){
         console.log(err)

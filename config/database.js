@@ -1,7 +1,14 @@
 const mongoose = require('mongoose')
 
+/**
+ * Function to connect to database
+ */
 const connectDB = async () => {
   try {
+    /**
+     * await response from mongodb for connection using environment 
+     * variable to get connection string
+     */ 
     const conn = await mongoose.connect(process.env.DB_STRING, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
@@ -15,4 +22,5 @@ const connectDB = async () => {
   }
 }
 
+//export function
 module.exports = connectDB

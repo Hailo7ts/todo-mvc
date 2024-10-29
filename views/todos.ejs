@@ -10,9 +10,17 @@
 <body>
     <h1>Todos</h1>
     <ul>
+    
+    <!-- forEach loop to render each todo in a li -->
     <% todos.forEach( el => { %>
         <li class='todoItem' data-id='<%=el._id%>'>
+
+            <!-- conditional/terinary: if elements todos completed = true assign class to completed
+             else assign class to not
+             This determines if todo is crossed out or not -->
             <span class='<%= el.completed === true ? 'completed' : 'not'%>'><%= el.todo %></span>
+
+            <!-- client side handles delete request -->
             <span class='del'> Delete </span>
         </li>
     <% }) %>    
@@ -20,6 +28,7 @@
 
     <h2>Things left to do: <%= left %></h2>
 
+    <!-- form submits a post to server side on the route /todos/createTodo to create a new todo item -->
     <form action="/todos/createTodo" method='POST'>
         <input type="text" placeholder="Enter Todo Item" name='todoItem'>
         <input type="submit">
